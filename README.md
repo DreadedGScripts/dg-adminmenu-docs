@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/license-Commercial-red.svg)
 ![Framework](https://img.shields.io/badge/framework-QBCore%20%7C%20ESX%20%7C%20Standalone-green.svg)
 
-**Full-featured NUI admin panel with integrated anti-cheat detection system**
+**Full-featured NUI admin panel with integrated server management tools**
 
 [Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#%EF%B8%8F-configuration) • [Support](#-support)
 
@@ -18,7 +18,7 @@
 
 ## 📋 Overview
 
-**DG AdminPanel** is a comprehensive administrative and anti-cheat solution for FiveM servers, featuring a modern NUI interface, real-time player monitoring, advanced permission systems, and integrated cheat detection with AI-powered suggestions.
+**DG AdminPanel** is a comprehensive administrative solution for FiveM servers, featuring a modern NUI interface, real-time player monitoring, advanced permission systems, and integrated security features.
 
 | Property | Value |
 |----------|-------|
@@ -28,7 +28,7 @@
 | **Framework Support** | QBCore, ESX, Standalone |
 | **Bridge Dependency** | [`dg-bridge`](https://github.com/DreadedGScripts/dg-bridge) |
 | **Discord Dependency** | [`dg-discord-bot`](https://github.com/DreadedGScripts/dg-discord) |
-| **License** | Commercial (see [`LICENSE.txt`](LICENSE.txt)) |
+| **License** | Commercial (see included license file) |
 
 ---
 
@@ -43,7 +43,6 @@
 **Core Panels**
 - 🏠 **Home** - Dashboard overview
 - 👥 **Players** - Player management
-- 🏆 **Leaderboard** - Suspect rankings
 - 🔧 **Tools** - Admin utilities
 - 💼 **Management** - Job/business controls
 
@@ -54,7 +53,7 @@
 - 🗺️ **Heat Map** - City activity visualization
 - 📋 **Reports** - Bug & player reports
 - 📊 **Status** - Server metrics
-- ⚡ **Triggers** - Detection feed
+- ⚡ **Activity** - Server event feed
 - 🔐 **Permissions** - Group-based access
 
 </td>
@@ -73,13 +72,13 @@
 
 ---
 
-### 🏆 Leaderboard & Monitoring
+### 🏆 Player Monitoring
 
 | Feature | Description |
 |---------|-------------|
-| **Suspect Ranking** | Real-time detection score leaderboard |
-| **Live Updates** | Automatic score refresh and sorting |
-| **Quick Actions** | Direct access to high-risk players |
+| **Player Overview** | Real-time player activity tracking |
+| **Live Updates** | Automatic player list refresh |
+| **Quick Actions** | Direct access to player management tools |
 
 ---
 
@@ -157,17 +156,16 @@ Real-time city activity visualization with auto-refresh, manual controls, zoom/p
 
 ---
 
-### ⚡ Triggers & Detection Feed
+### ⚡ Activity Feed
 
-**Real-time monitoring with advanced filtering:**
+**Real-time server activity monitoring with advanced filtering:**
 
 | Filter Type | Options |
 |-------------|---------|
-| **Category** | Detection • Menu • Security • Admin Actions |
-| **Severity** | Critical • Medium • Low |
+| **Category** | Security • Admin Actions • Player Events |
 | **Time Range** | Last Hour • 24H • Session • All |
 
-**Features:** Statistics cards, clear old logs, live push updates
+**Features:** Statistics cards, activity logs, live push updates
 
 ---
 
@@ -182,82 +180,19 @@ Real-time city activity visualization with auto-refresh, manual controls, zoom/p
 
 ---
 
-## 🛡️ Anti-Cheat & Security
+## 🛡️ Security Features
 
-### 🔍 Detection System
+### 🔒 Server Protection
 
-**Multi-Layer Protection**
-- ✅ Client-side detection threads
-- ✅ Server-side validation & scoring
-- ✅ Suspicion scoring with repeated-detection tracking
-- 🤖 AI suggestion pipeline (toggleable via `enableAISuggestions`)
-
-### 🎯 Detection Categories
-
-<table>
-<tr>
-<td width="33%" valign="top">
-
-**Movement**
-- Speed anomalies
-- Flying/noclip detection
-- Super jump detection
-- Spawn spam checks
-
-</td>
-<td width="33%" valign="top">
-
-**Combat**
-- Godmode detection
-- Health anomalies
-- Armor anomalies
-- Rapid fire detection
-
-</td>
-<td width="33%" valign="top">
-
-**Exploitation**
-- Money changes
-- Blacklist enforcement
-- Menu/trainer indicators
-- Entity spawn abuse
-
-</td>
-</tr>
-</table>
-
-### 🚫 Anti-Nuke Protection
-
-| Feature | Description |
-|---------|-------------|
-| **Entity Rate Limiting** | Prevent spawn flooding |
-| **Blacklist Cleanup** | Auto-remove prohibited entities |
-| **Explosion Control** | Rate-limit projectiles/explosions |
-| **Auto-Response** | Optional kick for extreme abuse |
+**Multi-Layer Security**
+- ✅ Server-side validation
+- ✅ Rate limiting and abuse prevention
+- ✅ Comprehensive logging system
+- ✅ Automated security responses
 
 ### 🔒 Security Module
 
-Server-side security helpers in `server/security.lua`:
-
-```lua
--- Rate Limiting
-exports['dg-adminmenu']:IsRateLimited(source, action, limit, timeWindow)
-exports['dg-adminmenu']:IsCriticalActionLimited(source, action)
-
--- Input Validation
-exports['dg-adminmenu']:ValidateString(input, pattern, maxLength)
-exports['dg-adminmenu']:ValidateNumber(input, min, max)
-exports['dg-adminmenu']:ValidatePlayerId(playerId)
-exports['dg-adminmenu']:SanitizeInput(input)
-
--- Security Logging
-exports['dg-adminmenu']:LogSecurityEvent(eventType, source, details)
-exports['dg-adminmenu']:GetSecurityLogs(filters)
-
--- Resource Protection
-exports['dg-adminmenu']:VerifyResourceIntegrity()
-exports['dg-adminmenu']:SecureRegisterNetEvent(eventName, handler)
-```
+Server-side security helpers provide rate limiting, input validation, event logging, and resource protection features.
 
 ---
 
@@ -265,17 +200,15 @@ exports['dg-adminmenu']:SecureRegisterNetEvent(eventName, handler)
 
 ### 📊 Auto-Created Tables
 
-```sql
-dg_aicheatdetect_logs       -- Detection event history
-dg_aicheatdetect_bans       -- Ban records
-dg_aicheatdetect_playerinfo -- Player tracking data
-dg_admin_reports            -- Bug & player reports
-dg_discord_threads          -- Discord integration cache
-```
+The system automatically creates database tables for:
+- Ban records and player tracking
+- Bug and player reports
+- Discord integration
+- Admin action logging
 
 ### 📝 Admin Action Logging
 
-All admin actions are logged as trigger type `admin` and visible in the **Triggers** tab under the `Admin Actions` filter.
+All admin actions are logged and visible in the activity feed with timestamp, actor, and target information.
 
 ---
 
@@ -327,15 +260,12 @@ Main configuration file: **`config.lua`**
 
 ```lua
 Config.framework = 'qbcore'              -- qbcore | esx | standalone
-Config.detectionEnabled = true           -- Enable anti-cheat system
-Config.menuDetectionEnabled = true       -- Detect mod menus
-Config.enableAISuggestions = false       -- AI-powered suggestions
-Config.antiNukeEnabled = true            -- Anti-nuke protection
-Config.criticalCheatKickBanEnabled = true -- Auto-action on critical cheats
-Config.autoBanCriticalCheats = false     -- Automatic bans
 Config.enableCharacterPreview = true     -- Character preview in UI
 Config.enableTrollCommands = false       -- Fun admin commands
+Config.logBansToDiscord = true           -- Discord ban notifications
 ```
+
+Additional security and detection settings are available in the configuration file.
 
 ---
 
@@ -352,12 +282,11 @@ exports['dg-adminmenu']:getPedStatus()
 ```lua
 -- Player Data
 exports['dg-adminmenu']:getPlayerCount()
-exports['dg-adminmenu']:getSuspicionScore(source)
 
--- Security Module (see Security section above for full list)
+-- Security Module
 exports['dg-adminmenu']:IsRateLimited(...)
 exports['dg-adminmenu']:ValidateString(...)
--- ... (9 additional security functions)
+-- Additional security and validation functions available
 ```
 
 ---
@@ -379,23 +308,19 @@ exports['dg-adminmenu']:ValidateString(...)
 |----------|-------------|
 | [`dg-bridge`](https://github.com/DreadedGScripts/dg-bridge) | Framework abstraction layer |
 | [`dg-discord-bot`](https://github.com/DreadedGScripts/dg-discord) | Discord integration API |
-| [`SERVER_CFG_PERMISSIONS.txt`](SERVER_CFG_PERMISSIONS.txt) | Permission configuration guide |
-| [`TERMS.md`](TERMS.md) | Terms of service & support |
-| [`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md) | Pre-release validation checklist |
 
 ---
 
 ## 📞 Support
 
 **Commercial License Holders:**
-- Contact DG-Scripts for installation, configuration, and bug support
-- See [`TERMS.md`](TERMS.md) for detailed support scope
+- Contact DG-Scripts for installation, configuration, and support
 - Provide order ID with all support requests
 
 **Documentation:**
-- [`LICENSE.txt`](LICENSE.txt) - License terms & restrictions
-- [`SECURITY.md`](SECURITY.md) - Security best practices
-- [`SERVER_CFG_PERMISSIONS.txt`](SERVER_CFG_PERMISSIONS.txt) - Permission setup
+- Comprehensive configuration guide included
+- Permission setup documentation
+- Security best practices
 
 ---
 
