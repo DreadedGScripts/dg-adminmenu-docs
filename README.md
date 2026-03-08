@@ -28,7 +28,7 @@
 | **Framework Support** | QBCore, ESX, Standalone |
 | **Bridge Dependency** | [`dg-bridge`](https://github.com/DreadedGScripts/dg-bridge) |
 | **Discord Dependency** | [`dg-discord-bot`](https://github.com/DreadedGScripts/dg-discord) |
-| **License** | Commercial (see included license file) |
+| **License** | Commercial |
 
 ---
 
@@ -144,6 +144,20 @@ Real-time city activity visualization with auto-refresh, manual controls, zoom/p
 | **Player Reports** | Open → In Review → Closed |
 | **Bug Reports** | `/reportbug <message>` command |
 | **Management** | Assign to admin, delete, notification system |
+
+---
+
+### 🔔 Admin Notifications
+
+Real-time alerts are delivered to online admins for key moderation and security events.
+
+| Notification Type | Example |
+|-------------------|---------|
+| **Cheat Detection** | Godmode, aimbot, rapid-fire flags |
+| **Suspicious Activity** | High-risk behavior score alerts |
+| **Reports** | New player/bug reports submitted |
+| **Admin Actions** | Warn, kick, ban, command activity |
+| **System Alerts** | Resource or server warnings |
 
 ---
 
@@ -318,9 +332,9 @@ exports['dg-adminmenu']:ValidateString(...)
 - Provide order ID with all support requests
 
 **Documentation:**
-- Comprehensive configuration guide included
-- Permission setup documentation
-- Security best practices
+- Configuration details are in your resource `config.lua`
+- Permission setup is managed in the in-game Permissions tab
+- Security best practices are described directly in this README
 
 ---
 
