@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/license-Commercial-red.svg)
 ![Framework](https://img.shields.io/badge/framework-QBCore%20%7C%20ESX%20%7C%20Standalone-green.svg)
 
-**Full-featured NUI admin panel with integrated server management tools**
+**Full-featured NUI admin panel with integrated anti-cheat detection system**
 
 [Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#%EF%B8%8F-configuration) • [Support](#-support)
 
@@ -18,7 +18,7 @@
 
 ## 📋 Overview
 
-**DG AdminPanel** is a comprehensive administrative solution for FiveM servers, featuring a modern NUI interface, real-time player monitoring, advanced permission systems, and integrated security features.
+**DG AdminPanel** is a comprehensive administrative and anti-cheat solution for FiveM servers, featuring a modern NUI interface, real-time player monitoring, advanced permission systems, and integrated cheat detection with AI-powered suggestions.
 
 | Property | Value |
 |----------|-------|
@@ -28,7 +28,8 @@
 | **Framework Support** | QBCore, ESX, Standalone |
 | **Bridge Dependency** | [`dg-bridge`](https://github.com/DreadedGScripts/dg-bridge) |
 | **Discord Dependency** | [`dg-discord-bot`](https://github.com/DreadedGScripts/dg-discord) |
-| **License** | Commercial |
+| **Notification Companion** | [`dg-notifications`](https://github.com/DreadedGScripts/dg-notifications) |
+| **License** | Commercial (see [`LICENSE.txt`](LICENSE.txt)) |
 
 ---
 
@@ -43,6 +44,7 @@
 **Core Panels**
 - 🏠 **Home** - Dashboard overview
 - 👥 **Players** - Player management
+- 🏆 **Leaderboard** - Suspect rankings
 - 🔧 **Tools** - Admin utilities
 - 💼 **Management** - Job/business controls
 
@@ -53,7 +55,7 @@
 - 🗺️ **Heat Map** - City activity visualization
 - 📋 **Reports** - Bug & player reports
 - 📊 **Status** - Server metrics
-- ⚡ **Activity** - Server event feed
+- ⚡ **Triggers** - Detection feed
 - 🔐 **Permissions** - Group-based access
 
 </td>
@@ -72,13 +74,27 @@
 
 ---
 
-### 🏆 Player Monitoring
+### � Multi-Language Support
 
 | Feature | Description |
 |---------|-------------|
-| **Player Overview** | Real-time player activity tracking |
-| **Live Updates** | Automatic player list refresh |
-| **Quick Actions** | Direct access to player management tools |
+| **10 Languages** | English, Spanish, French, German, Portuguese, Italian, Dutch, Russian, Chinese, Japanese |
+| **Easy Configuration** | Set default language in `config.lua` |
+| **Runtime Switching** | Change language without restart |
+| **Extensible** | Add new languages easily |
+| **Auto-Update UI** | UI automatically updates when language changes |
+
+> 📚 **See [LOCALIZATION.md](LOCALIZATION.md) for detailed documentation**
+
+---
+
+### �🏆 Leaderboard & Monitoring
+
+| Feature | Description |
+|---------|-------------|
+| **Suspect Ranking** | Real-time detection score leaderboard |
+| **Live Updates** | Automatic score refresh and sorting |
+| **Quick Actions** | Direct access to high-risk players |
 
 ---
 
@@ -147,20 +163,6 @@ Real-time city activity visualization with auto-refresh, manual controls, zoom/p
 
 ---
 
-### 🔔 Admin Notifications
-
-Real-time alerts are delivered to online admins for key moderation and security events.
-
-| Notification Type | Example |
-|-------------------|---------|
-| **Cheat Detection** | Godmode, aimbot, rapid-fire flags |
-| **Suspicious Activity** | High-risk behavior score alerts |
-| **Reports** | New player/bug reports submitted |
-| **Admin Actions** | Warn, kick, ban, command activity |
-| **System Alerts** | Resource or server warnings |
-
----
-
 ### 📊 Server Status Dashboard
 
 - ⏱️ Server uptime & player counts
@@ -170,16 +172,17 @@ Real-time alerts are delivered to online admins for key moderation and security 
 
 ---
 
-### ⚡ Activity Feed
+### ⚡ Triggers & Detection Feed
 
-**Real-time server activity monitoring with advanced filtering:**
+**Real-time monitoring with advanced filtering:**
 
 | Filter Type | Options |
 |-------------|---------|
-| **Category** | Security • Admin Actions • Player Events |
+| **Category** | Detection • Menu • Security • Admin Actions |
+| **Severity** | Critical • Medium • Low |
 | **Time Range** | Last Hour • 24H • Session • All |
 
-**Features:** Statistics cards, activity logs, live push updates
+**Features:** Statistics cards, clear old logs, live push updates
 
 ---
 
@@ -194,19 +197,82 @@ Real-time alerts are delivered to online admins for key moderation and security 
 
 ---
 
-## 🛡️ Security Features
+## 🛡️ Anti-Cheat & Security
 
-### 🔒 Server Protection
+### 🔍 Detection System
 
-**Multi-Layer Security**
-- ✅ Server-side validation
-- ✅ Rate limiting and abuse prevention
-- ✅ Comprehensive logging system
-- ✅ Automated security responses
+**Multi-Layer Protection**
+- ✅ Client-side detection threads
+- ✅ Server-side validation & scoring
+- ✅ Suspicion scoring with repeated-detection tracking
+- 🤖 AI suggestion pipeline (toggleable via `enableAISuggestions`)
+
+### 🎯 Detection Categories
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+**Movement**
+- Speed anomalies
+- Flying/noclip detection
+- Super jump detection
+- Spawn spam checks
+
+</td>
+<td width="33%" valign="top">
+
+**Combat**
+- Godmode detection
+- Health anomalies
+- Armor anomalies
+- Rapid fire detection
+
+</td>
+<td width="33%" valign="top">
+
+**Exploitation**
+- Money changes
+- Blacklist enforcement
+- Menu/trainer indicators
+- Entity spawn abuse
+
+</td>
+</tr>
+</table>
+
+### 🚫 Anti-Nuke Protection
+
+| Feature | Description |
+|---------|-------------|
+| **Entity Rate Limiting** | Prevent spawn flooding |
+| **Blacklist Cleanup** | Auto-remove prohibited entities |
+| **Explosion Control** | Rate-limit projectiles/explosions |
+| **Auto-Response** | Optional kick for extreme abuse |
 
 ### 🔒 Security Module
 
-Server-side security helpers provide rate limiting, input validation, event logging, and resource protection features.
+Server-side security helpers in `server/security.lua`:
+
+```lua
+-- Rate Limiting
+exports['dg-adminmenu']:IsRateLimited(source, action, limit, timeWindow)
+exports['dg-adminmenu']:IsCriticalActionLimited(source, action)
+
+-- Input Validation
+exports['dg-adminmenu']:ValidateString(input, pattern, maxLength)
+exports['dg-adminmenu']:ValidateNumber(input, min, max)
+exports['dg-adminmenu']:ValidatePlayerId(playerId)
+exports['dg-adminmenu']:SanitizeInput(input)
+
+-- Security Logging
+exports['dg-adminmenu']:LogSecurityEvent(eventType, source, details)
+exports['dg-adminmenu']:GetSecurityLogs(filters)
+
+-- Resource Protection
+exports['dg-adminmenu']:VerifyResourceIntegrity()
+exports['dg-adminmenu']:SecureRegisterNetEvent(eventName, handler)
+```
 
 ---
 
@@ -214,15 +280,17 @@ Server-side security helpers provide rate limiting, input validation, event logg
 
 ### 📊 Auto-Created Tables
 
-The system automatically creates database tables for:
-- Ban records and player tracking
-- Bug and player reports
-- Discord integration
-- Admin action logging
+```sql
+dg_aicheatdetect_logs       -- Detection event history
+dg_aicheatdetect_bans       -- Ban records
+dg_aicheatdetect_playerinfo -- Player tracking data
+dg_admin_reports            -- Bug & player reports
+dg_discord_threads          -- Discord integration cache
+```
 
 ### 📝 Admin Action Logging
 
-All admin actions are logged and visible in the activity feed with timestamp, actor, and target information.
+All admin actions are logged as trigger type `admin` and visible in the **Triggers** tab under the `Admin Actions` filter.
 
 ---
 
@@ -241,6 +309,7 @@ ensure dg-adminmenu   -- This resource
 
 ```lua
 ensure screenshot-basic -- For live screen capture feature
+ensure dg-notifications -- For external detection popup alerts
 ```
 
 ### ⚙️ server.cfg Order
@@ -250,6 +319,7 @@ ensure oxmysql
 ensure dg-bridge
 ensure dg-discord-bot
 ensure dg-adminmenu
+ensure dg-notifications # optional
 ensure screenshot-basic  # optional
 ```
 
@@ -274,12 +344,15 @@ Main configuration file: **`config.lua`**
 
 ```lua
 Config.framework = 'qbcore'              -- qbcore | esx | standalone
+Config.detectionEnabled = true           -- Enable anti-cheat system
+Config.menuDetectionEnabled = true       -- Detect mod menus
+Config.enableAISuggestions = false       -- AI-powered suggestions
+Config.antiNukeEnabled = true            -- Anti-nuke protection
+Config.criticalCheatKickBanEnabled = true -- Auto-action on critical cheats
+Config.autoBanCriticalCheats = false     -- Automatic bans
 Config.enableCharacterPreview = true     -- Character preview in UI
 Config.enableTrollCommands = false       -- Fun admin commands
-Config.logBansToDiscord = true           -- Discord ban notifications
 ```
-
-Additional security and detection settings are available in the configuration file.
 
 ---
 
@@ -296,11 +369,12 @@ exports['dg-adminmenu']:getPedStatus()
 ```lua
 -- Player Data
 exports['dg-adminmenu']:getPlayerCount()
+exports['dg-adminmenu']:getSuspicionScore(source)
 
--- Security Module
+-- Security Module (see Security section above for full list)
 exports['dg-adminmenu']:IsRateLimited(...)
 exports['dg-adminmenu']:ValidateString(...)
--- Additional security and validation functions available
+-- ... (9 additional security functions)
 ```
 
 ---
@@ -322,19 +396,24 @@ exports['dg-adminmenu']:ValidateString(...)
 |----------|-------------|
 | [`dg-bridge`](https://github.com/DreadedGScripts/dg-bridge) | Framework abstraction layer |
 | [`dg-discord-bot`](https://github.com/DreadedGScripts/dg-discord) | Discord integration API |
+| [`dg-notifications`](https://github.com/DreadedGScripts/dg-notifications) | External popup notifications for detections/score updates |
+| [`SERVER_CFG_PERMISSIONS.txt`](SERVER_CFG_PERMISSIONS.txt) | Permission configuration guide |
+| [`TERMS.md`](TERMS.md) | Terms of service & support |
+| [`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md) | Pre-release validation checklist |
 
 ---
 
 ## 📞 Support
 
 **Commercial License Holders:**
-- Contact DG-Scripts for installation, configuration, and support
+- Contact DG-Scripts for installation, configuration, and bug support
+- See [`TERMS.md`](TERMS.md) for detailed support scope
 - Provide order ID with all support requests
 
 **Documentation:**
-- Configuration details are in your resource `config.lua`
-- Permission setup is managed in the in-game Permissions tab
-- Security best practices are described directly in this README
+- [`LICENSE.txt`](LICENSE.txt) - License terms & restrictions
+- [`SECURITY.md`](SECURITY.md) - Security best practices
+- [`SERVER_CFG_PERMISSIONS.txt`](SERVER_CFG_PERMISSIONS.txt) - Permission setup
 
 ---
 
@@ -345,3 +424,29 @@ exports['dg-adminmenu']:ValidateString(...)
 *Built with ❤️ by DG-Scripts*
 
 </div>
+
+### 🔔 Admin Notification System
+
+`dg-adminmenu` supports two notification paths:
+
+- Built-in admin notification flow inside `dg-adminmenu`
+- External popup companion via `dg-notifications` (recommended for themed realtime alert cards)
+
+To enable external popups, ensure `dg-notifications` is started after `dg-adminmenu`.
+
+| Feature | Description |
+|---------|-------------|
+| **Real-Time Alerts** | Instant notifications to all online admins |
+| **Priority Levels** | Critical, High, Medium, Low with visual indicators |
+| **Event Types** | Cheat detection, reports, bans/kicks, commands, system alerts |
+| **Visual Popups** | Animated notification cards with auto-dismiss |
+| **Sound Alerts** | Audio feedback for critical events |
+| **History Tracking** | Persistent notification history (max 50 per admin) |
+| **Interactive** | Click notifications to view player details |
+| **Multi-Language** | Fully localized notification messages |
+| **Configurable** | Enable/disable specific notification types |
+| **Discord Integration** | Optional webhook for critical alerts |
+
+> 📚 **See [ADMIN_NOTIFICATIONS.md](ADMIN_NOTIFICATIONS.md) for detailed documentation**
+
+---
