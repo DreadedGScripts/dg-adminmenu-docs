@@ -10,7 +10,7 @@
 
 Modern NUI admin system for server operations, moderation, management analytics, and team workflows.
 
-[Overview](#overview) • [Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Ecosystem](#ecosystem)
+[Overview](#overview) • [Access--Beta](#access--beta) • [Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Ecosystem](#ecosystem) • [Support](#support)
 
 ---
 
@@ -20,6 +20,8 @@ Modern NUI admin system for server operations, moderation, management analytics,
 
 DG AdminPanel is a full administrative suite for FiveM communities. It gives staff one interface for moderation, player support, server controls, management operations, permissions, and live operational visibility.
 
+The platform is built for teams that need consistent staff workflows at scale, not just one-off admin commands. It combines day-to-day moderation tools with management, reporting, and observability so your team can respond quickly while keeping operations organized.
+
 | Property | Value |
 |----------|-------|
 | Resource Name | dg-adminmenu |
@@ -27,6 +29,37 @@ DG AdminPanel is a full administrative suite for FiveM communities. It gives sta
 | Version | 1.2.0 |
 | Framework Support | QBCore, ESX, Standalone |
 | License | Commercial |
+| Admin Panel Listing | https://dg-scripts.tebex.io/category/admin-panel |
+| Intended Audience | Serious RP and community-driven FiveM servers |
+
+---
+
+## Access & Beta
+
+### Purchase / Access
+
+- Public listing: https://dg-scripts.tebex.io/category/admin-panel
+- Resource package: DG AdminPanel (dg-adminmenu)
+- License model: commercial resource with active updates
+
+### Beta Testing Program
+
+Want early access to upcoming features and fixes before public release? We are accepting beta testers.
+
+Beta testers receive:
+- Access to pre-release builds
+- Early testing of new tabs, moderation actions, and management workflows
+- Priority feedback review for bug reports and UX improvements
+
+What we expect from beta testers:
+- Structured bug reports with reproduction steps
+- Environment details (framework, server build, dependencies)
+- Fast feedback on usability, permission edge-cases, and performance
+
+How to apply:
+1. Contact DreadedGScripts through your normal support channel.
+2. Include server size, framework, and typical staff count.
+3. Share why your team is a good fit for staged testing.
 
 ---
 
@@ -58,6 +91,7 @@ DG AdminPanel is a full administrative suite for FiveM communities. It gives sta
 - Warn, kick, and ban workflow
 - View player context and session details
 - Notes and moderation history workflow
+- Staff-focused action grouping for faster response during incidents
 
 ---
 
@@ -68,6 +102,7 @@ DG AdminPanel is a full administrative suite for FiveM communities. It gives sta
 - Spawn, repair, and remove vehicles
 - Player model controls
 - World utility controls (time/weather/entity cleanup)
+- Utility operations designed for both live incidents and scheduled maintenance
 
 ---
 
@@ -78,6 +113,7 @@ DG AdminPanel is a full administrative suite for FiveM communities. It gives sta
 - Business balance operations
 - Rank and role administration for job systems
 - Broadcast messaging tools for teams and organizations
+- Centralized workflows to reduce command fragmentation across staff teams
 
 ---
 
@@ -97,6 +133,7 @@ DG AdminPanel is a full administrative suite for FiveM communities. It gives sta
 - FPS, CPU, and memory summaries
 - External service status visibility
 - Pending workload indicators for staff
+- High-level metrics to help leads triage performance or staffing issues quickly
 
 ---
 
@@ -116,6 +153,7 @@ DG AdminPanel is a full administrative suite for FiveM communities. It gives sta
 - Assign access profiles by staff identity
 - Protected group controls
 - Audit-friendly permission administration
+- Scales from small staff teams to multi-tier management structures
 
 ---
 
@@ -148,6 +186,11 @@ ensure dg-discord-bot
 ensure dg-adminmenu
 ```
 
+Recommended startup order:
+1. Database and bridge resources
+2. Logging/communication resources
+3. DG AdminPanel and optional UI enhancements
+
 ### Optional Dependencies
 
 ```cfg
@@ -170,6 +213,7 @@ Recommended setup flow:
 2. Define staff groups and permission scopes.
 3. Select default locale and localization options.
 4. Validate tab visibility and action permissions for each staff role.
+5. Run an internal permission audit before moving to production.
 
 ---
 
