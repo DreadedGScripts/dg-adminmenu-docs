@@ -188,9 +188,10 @@ ensure dg-adminmenu
 ```
 
 Recommended startup order:
-1. Database and bridge resources
-2. Logging/communication resources
-3. DG AdminPanel and optional UI enhancements
+1. Notifications first  
+2. oxmysql and bridge resources
+3. Logging/communication resources
+4. DG AdminPanel and optional UI enhancements
 
 ### Optional Dependencies
 
