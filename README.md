@@ -181,6 +181,7 @@ Supported languages include:
 
 ```cfg
 ensure oxmysql
+ensure dg-notifications(Optional)
 ensure dg-bridge
 ensure dg-discord-bot
 ensure dg-adminmenu
