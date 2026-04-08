@@ -6,7 +6,7 @@
 
 ![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
 ![License](https://img.shields.io/badge/license-Commercial-red.svg)
-![Framework](https://img.shields.io/badge/framework-QBCore%20%7C%20ESX%20%7C%20Standalone-green.svg)
+![Framework](https://img.shields.io/badge/framework-QBCore%20%7C%20Qbox%20%7C%20ESX%20%7C%20Standalone-green.svg)
 
 Modern NUI admin system for server operations, moderation, management analytics, and team workflows.
 
@@ -27,7 +27,7 @@ The platform is built for teams that need consistent staff workflows at scale, n
 | Resource Name | dg-adminmenu |
 | Manifest Name | dg-adminpanel |
 | Version | 1.2.0 |
-| Framework Support | QBCore, ESX, Standalone |
+| Framework Support | QBCore, Qbox, ESX, Standalone |
 | License | Commercial |
 | Admin Panel Listing | https://dg-scripts.tebex.io/category/admin-panel |
 | Intended Audience | Serious RP and community-driven FiveM servers |
@@ -230,3 +230,15 @@ DG AdminPanel works with the broader DG stack:
 ## Support
 
 For setup support, feature questions, and licensing details, contact DreadedGScripts through your standard support channel.
+
+**Full-featured NUI admin panel with integrated anti-cheat detection system**
+
+[Features](#features) • [Installation](#installation) • [Commands](#commands) • [Configuration](#configuration) • [Support](#support)
+
+## 💬 Support & Contact
+
+For questions, bug reports, or suggestions, join our Discord:
+
+**[Dreaded Scripts Discord](https://discord.gg/ZNJ7tJ26Sn)**
+
+You can also reach out directly to the author: `DrahMah`
